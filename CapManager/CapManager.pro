@@ -5,6 +5,7 @@
 #-------------------------------------------------
 
 QT       += core gui network
+QT       += axcontainer
 
 greaterThan(QT_MAJOR_VERSION, 4): QT += widgets
 
@@ -31,12 +32,14 @@ INCLUDEPATH += common
 
 SOURCES += main.cpp\
     ui/mainwindow.cpp \
-    utils/qttelnet/qttelnet.cpp
+    utils/qttelnet/qttelnet.cpp \
+    utils/exceloperate.cpp
 
 HEADERS  += utils/Log.h \
     ui/mainwindow.h \
     utils/qttelnet/qttelnet.h \
     common/datatype.h \
-    common/tablemodel.h
+    common/tablemodel.h \
+    utils/exceloperate.h
 
 FORMS    += ui/mainwindow.ui

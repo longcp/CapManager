@@ -27,4 +27,20 @@ typedef struct CountryInfo {
     CAPINFO cap3;
 } COUNTRYINFO;
 
+typedef struct TableRowInfo {
+    int number;
+    QString city;
+    QString country;
+    QString zoningName;
+    QString zoningCode;
+    QString raisecomIp;
+    QString raisecomStat;
+    QString capIp;
+    QString capNetworkStat;
+    QString capSoftVer;
+    QString capTxPower;
+    QString capChannel;
+    QString remarks;
+} TABLEROWINFO;
+
 #endif // DATATYPE_H
