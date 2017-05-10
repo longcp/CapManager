@@ -31,6 +31,7 @@ private:
     void    clearTableView();
     void    setViewEnable(bool enable);
     bool    initDeviceTableView(QList<QList<QVariant>> &datas);
+    void    initTargetVillageDatas(QList<QList<QVariant>> &datas);
     bool    assertFile(QString path);
     bool    initSrcColumns(QList<QList<QVariant>> &datas);
 
@@ -60,6 +61,8 @@ private:
     const static int mColumnCapTxPower = 9;
     const static int mColumnCapChannel = 10;
     const static int mColumnRemarks = 11;
+
+    QList<VILLAGEINFO>*     mVillageInfos;
 
     Ui::MainWindow *ui;
 };

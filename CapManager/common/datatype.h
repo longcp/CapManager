@@ -12,20 +12,26 @@ enum ServerRequest {
 };
 
 typedef struct CapInfo {
+    QString ipAddr;
     bool isAccessed;
     QString oldSoftVer;
     QString curSoftVer;
     QString txPower;
+    QString channel;
 } CAPINFO;
 
-typedef struct CountryInfo {
-    QString ipAddr;
+typedef struct VillageInfo {
+    QString city;
+    QString country;
+    QString zoningName;
     QString zoningCode;
+    QString raisecomIp;
     bool isRaiseComAccessed;
     CAPINFO cap1;
     CAPINFO cap2;
     CAPINFO cap3;
-} COUNTRYINFO;
+    CAPINFO cap4;
+} VILLAGEINFO;
 
 typedef struct TableRowInfo {
     int number;

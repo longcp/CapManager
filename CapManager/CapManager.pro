@@ -27,19 +27,21 @@ LIBS += -L .\libs -lWS2_32
 
 INCLUDEPATH += ui
 INCLUDEPATH += utils
-INCLUDEPATH += utils/qttelnet
+INCLUDEPATH += common/qttelnet
 INCLUDEPATH += common
 
 SOURCES += main.cpp\
     ui/mainwindow.cpp \
-    utils/qttelnet/qttelnet.cpp \
-    utils/exceloperate.cpp
+    utils/exceloperate.cpp \
+    common/qttelnet/qttelnet.cpp \
+    common/telnetworker.cpp
 
 HEADERS  += utils/Log.h \
     ui/mainwindow.h \
-    utils/qttelnet/qttelnet.h \
     common/datatype.h \
     common/tablemodel.h \
-    utils/exceloperate.h
+    utils/exceloperate.h \
+    common/qttelnet/qttelnet.h \
+    common/telnetworker.h
 
 FORMS    += ui/mainwindow.ui

@@ -23,6 +23,7 @@ MainWindow::MainWindow(QWidget *parent) :
     mSourceFilePath(""),
     mIsDeviceTableInit(false),
     mFileDialog(new QFileDialog()),
+    mVillageInfos(new QList<VILLAGEINFO>),
     ui(new Ui::MainWindow)
 {
     ui->setupUi(this);
@@ -125,6 +126,46 @@ MainWindow::initDeviceTableView(QList<QList<QVariant>> &datas)
 }
 
 void
+MainWindow::initTargetVillageDatas(QList<QList<QVariant> > &datas)
+{
+    if (datas.isEmpty())
+        return;
+
+    mVillageInfos->clear();
+    VILLAGEINFO villageInfo;
+
+    int size = datas.size();
+    for (int i = mRowIpTableHeader+1; i < size; i++) {
+        villageInfo.city = datas.at(i).at(mIpTableColumnCity).toString();
+        villageInfo.country = datas.at(i).at(mIpTableColumnCountry).toString();
+        villageInfo.zoningName = datas.at(i).at(mIpTableColumnZoningName).toString();
+        villageInfo.zoningCode = datas.at(i).at(mIpTableColumnZongingCode).toString();
+        villageInfo.raisecomIp = datas.at(i).at(mIpTableColumnRaiseComIp).toString();
+        villageInfo.cap1.ipAddr = datas.at(i).at(mIpTableColumnCapIp).toString();
+        villageInfo.cap2.ipAddr = datas.at(++i).at(mIpTableColumnCapIp).toString();
+        villageInfo.cap3.ipAddr = datas.at(++i).at(mIpTableColumnCapIp).toString();
+        villageInfo.cap4.ipAddr = datas.at(++i).at(mIpTableColumnCapIp).toString();
+
+        if (villageInfo.city == "" || villageInfo.country == "")
+            continue;
+
+        mVillageInfos->push_back(villageInfo);
+        ALOGD("city = %s, country = %s, zoningName = %s, "
+              "zoningCode = %s, raisecomIp = %s, cap1.ipAddr = %s, "
+              "cap2.ipAddr = %s, cap3.ipAddr = %s, cap4.ipAddr = %s",
+              villageInfo.city.toStdString().data(),
+              villageInfo.country.toStdString().data(),
+              villageInfo.zoningName.toStdString().data(),
+              villageInfo.zoningCode.toStdString().data(),
+              villageInfo.raisecomIp.toStdString().data(),
+              villageInfo.cap1.ipAddr.toStdString().data(),
+              villageInfo.cap2.ipAddr.toStdString().data(),
+              villageInfo.cap3.ipAddr.toStdString().data(),
+              villageInfo.cap4.ipAddr.toStdString().data());
+    }
+}
+
+void
 MainWindow::appendRow(TableRowInfo rowInfo)
 {
     QStandardItem *num = new QStandardItem(QString::number(rowInfo.number));
@@ -220,6 +261,7 @@ MainWindow::on_chooseSrcToolButton_clicked()
         ret = ExcelOperate::readSheet(mSourceFilePath, 1, srcVillageDatas);
         ALOGD("ret = %d\n", ret);
         initDeviceTableView(srcVillageDatas);
+        initTargetVillageDatas(srcVillageDatas);
     }
 }
 
