@@ -7,6 +7,7 @@
 #include <exceloperate.h>
 #include <QStandardItem>
 #include <QDebug>
+#include <telnetworker.h>
 
 #define LOG_TAG                         "MAIN_WINDOW"
 #include <utils/Log.h>
@@ -268,5 +269,12 @@ MainWindow::on_chooseSrcToolButton_clicked()
 void
 MainWindow::on_mainStartBtn_clicked()
 {
+    if (!mIsDeviceTableInit)
+        return;
 
+    mTelnetWorker = new TelnetWorker(*mVillageInfos);
+    mTelnetWorker->start();
+
+    mIsTelnetThreadWorking = true;
+    setViewEnable(false);
 }

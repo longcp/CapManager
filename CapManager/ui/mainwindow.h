@@ -6,6 +6,7 @@
 
 class TableModel;
 class QFileDialog;
+class TelnetWorker;
 
 namespace Ui {
 class MainWindow;
@@ -40,6 +41,7 @@ private:
     QString         mSourceFilePath;
 
     bool mIsDeviceTableInit;
+    bool mIsTelnetThreadWorking;
 
     int mIpTableColumnCity;
     int mIpTableColumnCountry;
@@ -63,6 +65,7 @@ private:
     const static int mColumnRemarks = 11;
 
     QList<VILLAGEINFO>*     mVillageInfos;
+    TelnetWorker*           mTelnetWorker;
 
     Ui::MainWindow *ui;
 };

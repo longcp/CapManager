@@ -3,11 +3,11 @@
 #define LOG_TAG                         "TELNET_WORKER"
 #include "utils/Log.h"
 
-TelnetWorker::TelnetWorker(QList<QList<QVariant> > &targetDevList) :
+TelnetWorker::TelnetWorker(QList<VILLAGEINFO> &targetVillageInfoList) :
     mTelnet(new QtTelnet()),
-    mDeviceList(new QList<QList<QVariant>>)
+    mVillageList(new QList<VILLAGEINFO>)
 {
-    mDeviceList->swap(targetDevList);
+    mVillageList->swap(targetVillageInfoList);
 
     connect(mTelnet, SIGNAL(message(const QString &)),
             this, SLOT(telnetReturnMessage(const QString &)));
@@ -39,7 +39,22 @@ TelnetWorker::stop()
 void
 TelnetWorker::run()
 {
-
+    ALOGDTRACE();
+    for (int i = 0; i < mVillageList->size(); i++) {
+        VILLAGEINFO villageInfo = mVillageList->at(i);
+        ALOGD("city = %s, country = %s, zoningName = %s, "
+              "zoningCode = %s, raisecomIp = %s, cap1.ipAddr = %s, "
+              "cap2.ipAddr = %s, cap3.ipAddr = %s, cap4.ipAddr = %s",
+              villageInfo.city.toStdString().data(),
+              villageInfo.country.toStdString().data(),
+              villageInfo.zoningName.toStdString().data(),
+              villageInfo.zoningCode.toStdString().data(),
+              villageInfo.raisecomIp.toStdString().data(),
+              villageInfo.cap1.ipAddr.toStdString().data(),
+              villageInfo.cap2.ipAddr.toStdString().data(),
+              villageInfo.cap3.ipAddr.toStdString().data(),
+              villageInfo.cap4.ipAddr.toStdString().data());
+    }
 }
 
 void
@@ -129,8 +144,8 @@ TelnetWorker::stripCR(const QString &msg)
 }
 
 void
-TelnetWorker::setTargetDeviceList(QList<QList<QVariant> > &devList)
+TelnetWorker::setTargetDeviceList(QList<VILLAGEINFO> &villageList)
 {
-    mDeviceList->clear();
-    mDeviceList->swap(devList);
+    mVillageList->clear();
+    mVillageList->swap(villageList);
 }
