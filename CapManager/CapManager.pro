@@ -4,7 +4,7 @@
 #
 #-------------------------------------------------
 
-QT       += core gui
+QT       += core gui network
 
 greaterThan(QT_MAJOR_VERSION, 4): QT += widgets
 
@@ -22,10 +22,21 @@ DEFINES += QT_DEPRECATED_WARNINGS
 # You can also select to disable deprecated APIs only up to a certain version of Qt.
 #DEFINES += QT_DISABLE_DEPRECATED_BEFORE=0x060000    # disables all the APIs deprecated before Qt 6.0.0
 
+LIBS += -L .\libs -lWS2_32
+
+INCLUDEPATH += ui
+INCLUDEPATH += utils
+INCLUDEPATH += utils/qttelnet
+INCLUDEPATH += common
 
 SOURCES += main.cpp\
-        mainwindow.cpp
+    ui/mainwindow.cpp \
+    utils/qttelnet/qttelnet.cpp
 
-HEADERS  += mainwindow.h
+HEADERS  += utils/Log.h \
+    ui/mainwindow.h \
+    utils/qttelnet/qttelnet.h \
+    common/datatype.h \
+    common/tablemodel.h
 
-FORMS    += mainwindow.ui
+FORMS    += ui/mainwindow.ui

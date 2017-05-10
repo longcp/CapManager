@@ -3,6 +3,8 @@
 
 #include <QMainWindow>
 
+class TableModel;
+
 namespace Ui {
 class MainWindow;
 }
@@ -16,6 +18,12 @@ public:
     ~MainWindow();
 
 private:
+    void    initView();
+    void    clearTableView();
+    void    setViewEnable(bool enable);
+
+    TableModel*     mModel;
+
     Ui::MainWindow *ui;
 };
 
